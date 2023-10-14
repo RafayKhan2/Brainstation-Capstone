@@ -24,22 +24,18 @@ My team intends to use an open-source API database of the most common restaurant
 as their macro nutrient profile to help recommend offerings which fit into health-conscious consumers’
 diet plans.
 
-#### The Users:
-I am a home cook with an obsessive desire to control my macros. While I have been able to conform to
-that lifestyle throughout my university life, as I entered the workplace the shifting priorities of my day
-have led me to rely on my crutch of using Uber Eats more often. While I always try to cross reference my
-orders with the macros listed on restaurant websites, the process is often fruitless. My extension for
-Uber Eats and other food delivery apps can help health focused individuals make informed decisions by
-recommending them specific meals that fit their diet plans and goals.
+#### Our Target Audience:
+
+Individuals in Pursuit of a Healthier Lifestyle
+
+Our primary focus is on a demographic of individuals who are actively seeking to adopt a healthier lifestyle. It's a well-established fact that many embark on health and wellness journeys without the essential support systems required for sustainable success. In today's fast-paced world, online food delivery services have emerged as a popular means of meal acquisition. This paradigm shift in food consumption behavior necessitates the development of a sophisticated tool that seamlessly integrates with these services, creating a symbiotic relationship that offers users detailed, goal-specific recommendations.
+
+As a potential investor, it's crucial to recognize the vast market potential that lies within this segment. The fusion of technology and health-conscious consumer behavior presents an exciting opportunity for NourishNavi, a solution poised to revolutionize the way individuals engage with their nutrition, enabling healthier, more informed food choices. We invite you to consider NourishNavi as an investment with the potential to transform the well-being of our target users while capturing a substantial market share in the health and wellness technology landscape.
 
 #### The Big Idea:
 Given that users input their daily targets as well as the macro count of food consumed up until that point
 in the day, the extension would be able to sample dishes in the users’ surroundings and recommend
-dishes based on filters that the user can choose in a hierarchical fashion.
-The Impact: What societal or business value do you anticipate your project to add? If possible,
-try to quantify the scale of the problem (in dollars, in CO2, in time spent, ...)
-With the global health and wellness food market projected to bloom to a trillion dollars by 2026, brands
-like Sweet Green and Freshii will likely create brand deals with Uber to jump start this sector of online
+dishes based on filters that the user can choose in a hierarchical fashion. With the global health and wellness food market projected to bloom to a trillion dollars by 2026, brands like Sweet Green and Freshii will likely create brand deals with Uber to jump start this sector of online
 food delivery. This will increase not only increase customer acquisition but also create a new niche for
 health-centric businesses.
 
@@ -49,3 +45,5 @@ I will be using three databases for this project:
 2) Food.com, which is a open database comprising off over 350,000 dishes indivudals can cook at home all the while being able to track their macros
 https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews
 3) Local resturant data which will be scraped from food delievry apps. This will initially start with Uber Eats and then extend into other popular food delivery apps.
+
+I have also added a data_dictionary for referencing the databases I am currently using and what their variables store.
