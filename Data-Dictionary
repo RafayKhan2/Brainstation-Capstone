@@ -1,1 +1,30 @@
+Date created: Oct 10, 2023
+Created by:** Rafay Khan
+Date updated: Oct 14, 2023
 
+**Description of the data: Food recipies**
+
+Data from Food.com's online database of user entered dishes and recipes. These dishes include macros for each serving as well as directions for cooking and all the basic information needed to make the item.
+
+**Variable descriptions:**
+
+Name: 
+Date Published: Indicates the day a user added the dish to the database.
+Description: Usually contains a expansive description of the dish as well as what it means to the user alonsgide cooking instructions.
+Recipe Category: Indicates which catergory of food the dish falls under (Still needs to be cleaned as there as too many catergories)
+Keywords: Often indicates critical aspects of the dish including difficult level and other defining characteristics.
+Recipe Ingredient Quantities: Numerical ingredient quantities which match the ingredient parts column.
+Recipe Ingrediant Parts: The actual ingredients to be used in the dish.
+Aggregated Rating: The average ratings across the platform for the specific dish 
+Review Count: The review count for the specific dish on the platform
+Calories: Total calroies for the dish
+Recipe Servings: Number of servings which will result from cooking the dish with the listed ingredients
+Protein/Serving: - used in the distance reccomendation algorithm as a metric
+Calories/Serving: - used in the distance reccomendation algorithm as a metric
+Fat Content/Serving: -  used in the distance reccomendation algorithm as a metric
+Saturated Fat Content/Serving: - used in the distance reccomendation algorithm as a metric
+Cholesterol Content/Serving: - used in the distance reccomendation algorithm as a metric
+Sodium Content/Serving: - used in the distance reccomendation algorithm as a metric
+Carbohydrate Content/Serving: - used in the distance reccomendation algorithm as a metric
+Fiber Content/Serving: - used in the distance reccomendation algorithm as a metric
+Sugar Content/Serving: - used in the distance reccomendation algorithm as a metric
