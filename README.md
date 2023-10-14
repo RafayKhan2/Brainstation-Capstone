@@ -32,9 +32,7 @@ orders with the macros listed on restaurant websites, the process is often fruit
 Uber Eats and other food delivery apps can help health focused individuals make informed decisions by
 recommending them specific meals that fit their diet plans and goals.
 
-The Big Idea: How can machine learning bring solutions to these areas? Research how other
-people have approached the problem previously. Refer to the "Intro to Capstone" slides on
-synapse for an overview of different machine learning approaches.
+#### The Big Idea:
 Given that users input their daily targets as well as the macro count of food consumed up until that point
 in the day, the extension would be able to sample dishes in the users’ surroundings and recommend
 dishes based on filters that the user can choose in a hierarchical fashion.
@@ -44,18 +42,10 @@ With the global health and wellness food market projected to bloom to a trillion
 like Sweet Green and Freshii will likely create brand deals with Uber to jump start this sector of online
 food delivery. This will increase not only increase customer acquisition but also create a new niche for
 health-centric businesses.
-Rafay Khan
-The Data: Identify several possible datasets in this subject area and describe them at a high
-level. Include references. If you struggle to find more than one or two datasets, this might
-mean a Data Science approach to the problem will be challenging. Check in with your
-Educator.
-I will be using the Nutritionix database, which is the world’s largest verified nutrition database.
-https://www.nutritionix.com/
-The Alternative: In a few sentences, summarize a problem in an alternative subject area that
-also interests you.
-Like I previously discussed with my educators, I initially hope to make an AI based commentator for
-basketball games which would analyze players positions and plays through computer vision to create
-accurate and compelling commentary on live games. While an ambitious idea, the resources and training
-footage needed for this projec
 
-## Overview:
+#### The Data:
+I will be using three databases for this project: 
+1) Nutrionix, which is the world’s largest verified nutrition database with over 209,000 restaurants with macros tracked for every item on the menu. https://www.nutritionix.com/
+2) Food.com, which is a open database comprising off over 350,000 dishes indivudals can cook at home all the while being able to track their macros
+https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews
+3) Local resturant data which will be scraped from food delievry apps. This will initially start with Uber Eats and then extend into other popular food delivery apps.
