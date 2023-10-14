@@ -8,7 +8,7 @@ Data from Food.com's online database of user entered dishes and recipes. These d
 
 **Variable descriptions:**
 
-Name: 
+Name: Name of the dish
 Date Published: Indicates the day a user added the dish to the database.
 Description: Usually contains a expansive description of the dish as well as what it means to the user alonsgide cooking instructions.
 Recipe Category: Indicates which catergory of food the dish falls under (Still needs to be cleaned as there as too many catergories)
