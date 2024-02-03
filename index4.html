@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Restaurants</title>
+</head>
+<body>
+    <h1>Nearby Restaurants</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Address</th>
+                <th>Open Now</th>
+                <th>Map Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in result2.results %}
+                <tr>
+                    <td>{{ restaurant.name }}</td>
+                    <td>{{ restaurant.rating }}</td>
+                    <td>{{ restaurant.vicinity }}</td>
+                    <td>{% if restaurant.opening_hours and restaurant.opening_hours.open_now %}Yes{% else %}No{% endif %}</td>
+                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ restaurant.geometry.location.lat }},{{ restaurant.geometry.location.lng }}" target="_blank">View on Map</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

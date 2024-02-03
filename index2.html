@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Map</title>
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        // Extract restaurant data from Flask API response
+        var restaurantData = {{ result2|tojson|safe }};
+
+        // Initialize the map
+        var map = L.map('map').setView([24.9567633, 67.069463], 13);
+
+        // Add a tile layer to the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Iterate through the restaurant data and add markers to the map
+        restaurantData.data.forEach(function(restaurant) {
+            var latitude = parseFloat(restaurant.latitude);
+            var longitude = parseFloat(restaurant.longitude);
+
+            // Create a marker for each restaurant
+            var marker = L.marker([latitude, longitude]).addTo(map);
+
+            // Add a popup with restaurant information
+            var popupContent = "<b>" + restaurant.name + "</b><br>" +
+                               "Address: " + restaurant.address + "<br>" +
+                               "Cuisine: " + restaurant.cuisine.map(c => c.name).join(", ") + "<br>" +
+                               "<a href='" + restaurant.web_url + "' target='_blank'>View on TripAdvisor</a>";
+            
+            marker.bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>

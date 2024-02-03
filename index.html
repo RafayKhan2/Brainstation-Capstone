@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritionix API Demo</title>
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #map {
+            height: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Nutritionix API Demo</h1>
+
+    <!-- Add input fields for minimum and maximum calories -->
+    <form method="post" action="/">
+        <label for="query">Enter your search query:</label>
+        <input type="text" id="query" name="query" required>
+        <label for="min_calories">Minimum Calories:</label>
+        <input type="number" id="min_calories" name="min_calories" placeholder="Enter min calories">
+        <label for="max_calories">Maximum Calories:</label>
+        <input type="number" id="max_calories" name="max_calories" placeholder="Enter max calories">
+        <label for="max_calories">Radius (in meters):</label>
+        <input type="number" id="radius" name="radius" placeholder="Enter radius">
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="long" id="long">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if result1 %}
+    <h2>API Response:</h2>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Food Name</th>
+                <th>Brand Name</th>
+                <th>Serving Unit</th>
+                <th>Calories</th>
+                <th>Calories Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result1.branded %}
+            {% if item.status == 'Perfect Calorie Match' %}
+            <!-- Apply green color for "Perfect Calorie Match" -->
+            <tr style="color: green;">
+                {% elif item.status == 'High Calories' %}
+                <!-- Apply red color for "High Calories" -->
+            <tr style="color: red;">
+                {% else %}
+                <!-- For other statuses, use default color -->
+            <tr>
+                {% endif %}
+                <td><img src="{{ item.photo.thumb }}" alt="" srcset="" width="100px"></td>
+                <td>{{ item.food_name }}</td>
+                <td>{{ item.brand_name }}</td>
+                <td>{{ item.serving_unit }}</td>
+                <td>{{ item.nf_calories }}</td>
+                <td>{{ item.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    
+    {% if result1 %}
+
+    <h1>Nearby Restaurants</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Address</th>
+                <th>Website</th>
+                <th>Contact</th>
+                <th>Open Now</th>
+                <th>Map Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in result2.results %}
+                <tr>
+                    <td>{{ restaurant.name }}</td>
+                    <td>{{ restaurant.rating }}</td>
+                    <td>{{ restaurant.vicinity }}</td>
+                    <!-- <td><a href="{{ restaurant.place_detail.website }}" target="_blank">{{ restaurant.place_detail.website }}</a> </td> -->
+                    <td><a href="{{ restaurant.place_detail.website }}" target="_blank">{% if restaurant.place_detail.website %}Visit Website{% endif %}</a> </td>
+                    <td>{{ restaurant.place_detail.international_phone_number }}</td>
+                    <td>{% if restaurant.opening_hours and restaurant.opening_hours.open_now %}Yes{% else %}No{% endif %}</td>
+                    <td><a href="https://www.google.com/maps/search/?api=1&query={{ restaurant.geometry.location.lat }},{{ restaurant.geometry.location.lng }}" target="_blank">View on Map</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <!-- <br><br>
+
+    <div id="map"></div> -->
+
+
+</body>
+<script>
+    var latitude, longitude; 
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+
+        document.getElementById("lat").value = latitude
+        document.getElementById("long").value = longitude
+
+        // console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+
+        // You can now send the latitude and longitude to your server or perform other actions.
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
+    // Call the function to get the location when the page loads
+    getLocation();
+
+
+</script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- {% if result2 %}
+
+<script>
+    var restaurants = {{ result2 | tojson | safe }};
+
+    var map = L.map('map').setView([restaurants[0].geometry.location.lat, restaurants[0].geometry.location.lng], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    for (var i = 0; i < restaurants.length; i++) {
+        var restaurant = restaurants[i];
+        var latlng = [restaurant.geometry.location.lat, restaurant.geometry.location.lng];
+        var marker = L.marker(latlng).addTo(map);
+        marker.bindPopup(`<b>${restaurant.name}</b><br>Rating: ${restaurant.rating || 'N/A'}<br>${restaurant.vicinity}`);
+    }
+</script>
+
+
+{% endif %} -->
+
+</html>

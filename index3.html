@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Restaurants Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Nearby Restaurants Map</h1>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var restaurants = {{ restaurants | tojson | safe }};
+
+    var map = L.map('map').setView([restaurants[0].geometry.location.lat, restaurants[0].geometry.location.lng], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    for (var i = 0; i < restaurants.length; i++) {
+        var restaurant = restaurants[i];
+        var latlng = [restaurant.geometry.location.lat, restaurant.geometry.location.lng];
+        var marker = L.marker(latlng).addTo(map);
+        marker.bindPopup(`<b>${restaurant.name}</b><br>Rating: ${restaurant.rating || 'N/A'}<br>${restaurant.vicinity}`);
+    }
+</script>
+
+</body>
+</html>

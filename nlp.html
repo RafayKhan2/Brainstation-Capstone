@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritionix API Demo</title>
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #map {
+            height: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Nutritionix API Demo</h1>
+
+    <!-- Add input fields for minimum and maximum calories -->
+    <form method="post" action="/nlp">
+        <label for="query">Enter your search query:</label>
+        <input type="text" id="query" name="query" required>
+        <br>
+
+        <!-- nf_calories -->
+        <label for="min_calories">Minimum Calories:</label>
+        <input type="number" value="0" id="min_calories" name="min_calories" placeholder="Enter min calories">
+
+        <label for="max_calories">Maximum Calories:</label>
+        <input type="number" value="0" id="max_calories" name="max_calories" placeholder="Enter max calories">
+<br>
+        
+        <!-- nf_cholesterol -->
+        <label for="min_cholesterol">Minimum Cholesterol:</label>
+        <input type="number" value="0" id="min_cholesterol" name="min_cholesterol" placeholder="Enter min cholesterol">
+
+        <label for="max_cholesterol">Maximum Cholesterol:</label>
+        <input type="number" value="0" id="max_cholesterol" name="max_cholesterol" placeholder="Enter max cholesterol">
+        <br>
+        
+        <!-- nf_dietary_fiber -->
+        <label for="min_dietary_fiber">Minimum Dietary Fiber:</label>
+        <input type="number" value="0" id="min_dietary_fiber" name="min_dietary_fiber" placeholder="Enter min dietary fiber">
+
+        <label for="max_dietary_fiber">Maximum Dietary Fiber:</label>
+        <input type="number" value="0" id="max_dietary_fiber" name="max_dietary_fiber" placeholder="Enter max dietary fiber">
+        <br>
+        
+        <!-- nf_protein -->
+        <label for="min_protein">Minimum Protein:</label>
+        <input type="number" value="0" id="min_protein" name="min_protein" placeholder="Enter min protein">
+
+        <label for="max_protein">Maximum Protein:</label>
+        <input type="number" value="0" id="max_protein" name="max_protein" placeholder="Enter max protein">
+        <br>
+        
+        <!-- nf_saturated_fat -->
+        <label for="min_saturated_fat">Minimum Saturated Fat:</label>
+        <input type="number" value="0" id="min_saturated_fat" name="min_saturated_fat" placeholder="Enter min saturated fat">
+
+        <label for="max_saturated_fat">Maximum Saturated Fat:</label>
+        <input type="number" value="0" id="max_saturated_fat" name="max_saturated_fat" placeholder="Enter max saturated fat">
+        <br>
+
+        <!-- nf_saturated_fat -->
+        <label for="min_fat">Minimum Fat:</label>
+        <input type="number" value="0" id="min_fat" name="min_fat" placeholder="Enter min fat">
+
+        <label for="max_fat">Maximum Fat:</label>
+        <input type="number" value="0" id="max_fat" name="max_fat" placeholder="Enter max fat">
+        <br>
+
+        <!-- nf_sugars -->
+        <label for="min_sugars">Minimum Sugars:</label>
+        <input type="number" value="0" id="min_sugars" name="min_sugars" placeholder="Enter min sugars">
+
+        <label for="max_sugars">Maximum Sugars:</label>
+        <input type="number" value="0" id="max_sugars" name="max_sugars" placeholder="Enter max sugars">
+        <br>
+        
+        <!-- nf_total_carbohydrate -->
+        <label for="min_total_carbohydrate">Minimum Total Carbohydrate:</label>
+        <input type="number" value="0" id="min_total_carbohydrate" name="min_total_carbohydrate"
+            placeholder="Enter min total carbohydrate">
+
+        <label for="max_total_carbohydrate">Maximum Total Carbohydrate:</label>
+        <input type="number" value="0" id="max_total_carbohydrate" name="max_total_carbohydrate"
+            placeholder="Enter max total carbohydrate">
+            <br>
+        
+        
+        <button type="submit">Search</button>
+
+    </form>
+
+    {% if result %}
+    <h2>API Response:</h2>
+    <table border="2">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Food Name</th>
+                <th>Calories</th>
+                <th>Total Fat</th>
+                <th>Saturated Fat</th>
+                <th>Cholesterol</th>
+                <th>Carbohydrate</th>
+                <th>Dietary Fiber</th>
+                <th>Sugars</th>
+                <th>Protein</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result.foods %}
+            <tr>
+                <td><img src="{{ item.photo.highres }}" alt="" srcset="" width="100px"></td>
+                <td>{{ item.food_name }}</td>
+                <td>{{ item.nf_calories }}</td>
+                <td>{{ item.nf_total_fat }}</td>
+                <td>{{ item.nf_saturated_fat }}</td>
+                <td>{{ item.nf_cholesterol }}</td>
+                <td>{{ item.nf_total_carbohydrate }}</td>
+                <td>{{ item.nf_dietary_fiber }}</td>
+                <td>{{ item.nf_sugars }}</td>
+                <td>{{ item.nf_protein }}</td>
+                <td>
+                    <ul>
+                        {% for st in item.status %}
+                        <li>{{st}}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+</body>
+
+
+
+
+</html>
