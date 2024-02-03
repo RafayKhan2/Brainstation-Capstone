@@ -44,6 +44,5 @@ I will be using three databases for this project:
 1) Nutrionix, which is the world’s largest verified nutrition database with over 209,000 restaurants with macros tracked for every item on the menu. https://www.nutritionix.com/
 2) Food.com, which is a open database comprising off over 350,000 dishes indivudals can cook at home all the while being able to track their macros
 https://www.kaggle.com/datasets/irkaal/foodcom-recipes-and-reviews
-3) Local resturant data which will be scraped from food delievry apps. This will initially start with Uber Eats and then extend into other popular food delivery apps.
-
+3) Local resturant data which are scraped from the google map API. 
 I have also added a data_dictionary for referencing the databases I am currently using and what their variables store.
